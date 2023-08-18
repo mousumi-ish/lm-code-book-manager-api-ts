@@ -20,10 +20,17 @@ export const populateDummyData = async () => {
 	await Book.create({
 		bookId: 3,
 		title: "James and the Giant Peach",
-		author: "Roald Dhal",
+		author: "Roald Dahl",
 		description:
 			"James has to live with his awful aunties and discovers something that can change his life ",
 	});
+	await Book.create({
+		bookId: 4,
+		title: "Harry Potter",
+		author: "J.K Rowling",
+		description: "Great adventure stories",
+	});
+
 	const bookCount = (await Book.findAll()).length;
 	console.log(
 		`📚 ${bookCount} book${bookCount !== 1 ? "s" : ""} added to table`
