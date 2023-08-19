@@ -20,12 +20,20 @@ export const getBook = async (req: Request, res: Response) => {
 export const saveBook = async (req: Request, res: Response) => {
 	const bookToBeSaved = req.body;
 	try {
-		const book = await bookService.saveBook(bookToBeSaved);
-		res.status(201).json(book);
+		//const book = await bookService.saveBook(bookToBeSaved);
+		//res.status(201).json(book);
+		const bookCheck = await bookService.getBook(Number(bookToBeSaved.bookId));
+		if (bookCheck) {
+			res.status(406).json("Book Id already exists");
+		} else {
+			const book = await bookService.saveBook(bookToBeSaved);
+			res.status(201).json(book);
+		}
 	} catch (error) {
 		res.status(400).json({ message: (error as Error).message });
 	}
 };
+//};
 
 // User Story 4 - Update Book By Id Solution
 export const updateBook = async (req: Request, res: Response) => {
