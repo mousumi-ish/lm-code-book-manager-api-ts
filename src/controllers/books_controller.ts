@@ -24,7 +24,8 @@ export const saveBook = async (req: Request, res: Response) => {
 		//res.status(201).json(book);
 		const bookCheck = await bookService.getBook(Number(bookToBeSaved.bookId));
 		if (bookCheck) {
-			res.status(406).json("Book Id already exists");
+			//res.status(406).json("Book Id already exists");
+			throw new Error("Book Id already exists");
 		} else {
 			const book = await bookService.saveBook(bookToBeSaved);
 			res.status(201).json(book);
